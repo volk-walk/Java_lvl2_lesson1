@@ -1,57 +1,24 @@
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-        try {
-            checkArray(creatingAnArray());
-        }catch (MyArraySizeException | MyArrayDataException e){
-            e.printStackTrace();
+        PhoneDirectory phoneDirectory = new PhoneDirectory();
+        phoneDirectory.directory();
+        phoneDirectory.get("соболева");
+        String [] arr = {"собака","котик","попугай","лошадка","котик","хомяк","попугай"};
+        System.out.print("Первоначальный массив: ");
+        Map<String,Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length ; i++) {
+            System.out.print(" [" + arr[i] + "] ");
+            map.put(arr[i], map.getOrDefault(arr[i],0)+1);
         }
-
-    }
-    /**
-     * Вычисление суммы ячеек массива
-     *
-     * @param arr1
-     * @throws MyArrayDataException при некорректном значении ячейки
-     * @throws MyArraySizeException при некорректном размере массива
-     *
-     * */
-    public static void checkArray(String[][] arr1) throws MyArraySizeException, MyArrayDataException{
-        int sumOfArray = 0;
-        if (arr1.length != 4){
-            throw new MyArraySizeException("столб не соответсвует размеру");
-        }
-        for (int i = 0; i < arr1.length; i++) {
-            if(arr1[i].length != 4 ){
-                throw new MyArraySizeException("строка не соотвествует рамзеру");
-            }
-            for (int j = 0; j < arr1[i].length; j++) {
-                try{
-                    sumOfArray += Integer.parseInt(arr1[i][j]);
-                }catch (NumberFormatException e){
-                    System.out.println("некорректая ячейка массива: " + i + " " + j + "");
-                    throw new MyArrayDataException();
-                }
-
-            }
-        }
-        System.out.println("Сумма всех ячеек массива: " + sumOfArray);
-    }
-    /**
-     *
-     * Задание массива
-     *
-     * */
-    public static String [][] creatingAnArray(){
-        String [][] arr1 = {
-                {"1", "3", "3","4"},
-                {"1", "3", "3","4"},
-                {"1", "3", "3","4"},
-                {"1", "3", "3","4"},
-
-        };
-        return arr1;
+            System.out.println();
+            System.out.println("Встречается каждое слово: " + map );
+            Set <String> set = new HashSet<>(Arrays.asList(arr));
+            System.out.println("Уникальное значение: "+ set);
     }
 }
+
 
 
 
